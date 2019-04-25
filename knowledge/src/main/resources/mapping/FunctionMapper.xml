@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.knowledge.dao.FunctionMapper" >
+  <resultMap id="BaseResultMap" type="com.knowledge.entity.Function" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />
+    <result column="pid" property="pid" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from function
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.knowledge.entity.Function" >
+    <selectKey resultType="java.lang.String" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into function (code, `name`, `time`, 
+      pid)
+    values (#{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, 
+      #{pid,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.knowledge.entity.Function" >
+    update function
+    set code = #{code,jdbcType=VARCHAR},
+      `name` = #{name,jdbcType=VARCHAR},
+      `time` = #{time,jdbcType=TIMESTAMP},
+      pid = #{pid,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select id, code, `name`, `time`, pid
+    from function
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, code, `name`, `time`, pid
+    from function
+  </select>
+</mapper>

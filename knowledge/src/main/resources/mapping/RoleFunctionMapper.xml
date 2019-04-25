@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.knowledge.dao.RoleFunctionMapper" >
+  <resultMap id="BaseResultMap" type="com.knowledge.entity.RoleFunction" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="role_id" property="roleId" jdbcType="VARCHAR" />
+    <result column="function_id" property="functionId" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from role_function
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.knowledge.entity.RoleFunction" >
+    <selectKey resultType="java.lang.String" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into role_function (role_id, function_id)
+    values (#{roleId,jdbcType=VARCHAR}, #{functionId,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.knowledge.entity.RoleFunction" >
+    update role_function
+    set role_id = #{roleId,jdbcType=VARCHAR},
+      function_id = #{functionId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select id, role_id, function_id
+    from role_function
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, role_id, function_id
+    from role_function
+  </select>
+</mapper>

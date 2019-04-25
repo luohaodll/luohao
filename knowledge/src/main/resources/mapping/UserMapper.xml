@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.knowledge.dao.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.knowledge.entity.User" >
+    <result column="id" property="id" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="telephone" property="telephone" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="department_id" property="departmentId" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="qq" property="qq" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insert" parameterType="com.knowledge.entity.User" >
+    <selectKey resultType="java.lang.String" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into user (`name`, `status`, telephone, 
+      createtime, username, department_id, 
+      `password`, qq, email
+      )
+    values (#{name,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{telephone,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{username,jdbcType=VARCHAR}, #{departmentId,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}
+      )
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, `name`, `status`, telephone, createtime, username, department_id, `password`, 
+    qq, email
+    from user
+  </select>
+</mapper>
