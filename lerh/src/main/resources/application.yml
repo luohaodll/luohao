@@ -1,0 +1,52 @@
+#注册中心
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8081/eureka/
+server:
+#  端口
+  port: 8888
+spring:
+  http:
+#    编码
+    encoding:
+      charset: utf-8
+      enabled: true
+#  数据库
+  datasource:
+    url: jdbc:mysql://47.107.165.252:3306/ler?useUnicode=true&characterEncoding=UTF-8&useSSL=true
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+#  rabbitmq
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+  application:
+    name: lerh
+    mvc:
+#      静态资源
+      resources:
+        static-locations: classpath:/static
+mybatis:
+  mapper-locations: classpath:/mapping/*.xml
+  type-aliases-package: com.lerh.entity
+  config-locatins: classpath:/mybatis/mybatis-config.xml
+
+    #pagehelper
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+feign:
+  client:
+    config:
+      default:           #服务名，填写default为所有服务
+        connectTimeout: 6000
+        readTimeout: 1200000
+  hystrix:
+    enabled: false
