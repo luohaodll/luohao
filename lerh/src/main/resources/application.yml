@@ -32,6 +32,8 @@ spring:
       resources:
         static-locations: classpath:/static
 mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   mapper-locations: classpath:/mapping/*.xml
   type-aliases-package: com.lerh.entity
   config-locatins: classpath:/mybatis/mybatis-config.xml

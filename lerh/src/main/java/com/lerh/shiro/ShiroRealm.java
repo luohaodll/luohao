@@ -92,7 +92,6 @@ public class ShiroRealm extends AuthorizingRealm {
         String username = (String) token.getPrincipal();
         String password = new String((char[]) token.getCredentials());
         User user = userService.selectByAccount(username);
-
         if (null == user) {
             return null;
         } else {

@@ -50,7 +50,7 @@ public class ShiroConfig {
         // 必须设置 SecurityManager
         shiroFilterFactoryBean.setSecurityManager(securityManager);
         // setLoginUrl 如果不设置值，默认会自动寻找Web工程根目录下的"/login.jsp"页面 或 "/login" 映射
-        shiroFilterFactoryBean.setLoginUrl("/login/render");
+        shiroFilterFactoryBean.setLoginUrl("/login/lerh");
         // 设置无权限时跳转的 url;
         shiroFilterFactoryBean.setUnauthorizedUrl("/login/lerh");
 
@@ -65,6 +65,7 @@ public class ShiroConfig {
         //开放登陆接口
         filterChainDefinitionMap.put("/login/lerh", "anon");
         filterChainDefinitionMap.put("/login/login", "anon");
+        filterChainDefinitionMap.put("/fileController/**", "anon");
 //       开放静态文件
         filterChainDefinitionMap.put("/js/**","anon");
         filterChainDefinitionMap.put("/css/**","anon");
