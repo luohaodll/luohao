@@ -14,10 +14,11 @@ spring:
       enabled: true
 #  数据库
   datasource:
-    url: jdbc:mysql://47.107.165.252:3306/ler?useUnicode=true&characterEncoding=UTF-8&useSSL=true
+    url: jdbc:mysql://47.107.165.252:3306/lerh?serverTimezone=UTC&characterEncoding=utf8&useUnicode=true&useSSL=false
+
     username: root
-    password: root
-    driver-class-name: com.mysql.jdbc.Driver
+    password: LUOhao@0512
+    driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
 #  rabbitmq
   rabbitmq:

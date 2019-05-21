@@ -1,70 +1,56 @@
 package com.lerh.controller.user;
 
-import com.lerh.entity.AjaxEntity;
-import com.lerh.entity.User;
-import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import java.util.List;
+import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.web.context.WebApplicationContext;
 
 import static org.junit.Assert.*;
 
-/*
- *
- *          ┌─┐       ┌─┐
- *       ┌──┘ ┴───────┘ ┴──┐
- *       │                 │
- *       │       ───       │
- *       │  ─┬┘       └┬─  │
- *       │                 │
- *       │       ─┴─       │
- *       │                 │
- *       └───┐         ┌───┘
- *           │         │
- *           │         │
- *           │         │
- *           │         └──────────────┐
- *           │                        │
- *           │                        ├─┐
- *           │                        ┌─┘
- *           │                        │
- *           └─┐  ┐  ┌───────┬──┐  ┌──┘
- *             │ ─┤ ─┤       │ ─┤ ─┤
- *             └──┴──┘       └──┴──┘
- *                 神兽保佑
- *                 代码无BUG!
- * @Title: UserControllerTest
- * @PackageNmae: com.lerh.controller.user
- * @Description:
- * @author Lerh
- * @date 10:53 2019/5/9
- */
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest
+@WebAppConfiguration
 public class UserControllerTest {
+
     @Autowired
-    private UserController userController;
+    private WebApplicationContext webApplicationContext;
+    @Autowired
+    private MockMvc mockMvc;
+
+    Logger logger= LoggerFactory.getLogger(UserControllerTest.class);
 
     @Before
     public void setUp() throws Exception {
-        System.out.println("测试开始");
-    }
-
-    @After
-    public void tearDown() throws Exception {
-        System.out.println("测试结束");
+        logger.info("测试开始");
     }
 
     @Test
-    public void userList() {
-        AjaxEntity ajaxEntity=new AjaxEntity();
-        ajaxEntity=userController.userList();
-        System.out.println(ajaxEntity.getData().toString());
-        System.out.println(ajaxEntity.getStatus());
+    public void userList() throws Exception {
+        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.post("/userController/userList");
+
+        ResultActions result = mockMvc.perform(requestBuilder);
+
+        MvcResult mvcResult = result.andExpect(MockMvcResultMatchers.status().isOk())
+                .andDo(MockMvcResultHandlers.print())
+                .andReturn();// 返回执行请求的结果
+
+        System.out.println("response------------------:"+mvcResult.getResponse().getContentAsString());
+
+
     }
 }

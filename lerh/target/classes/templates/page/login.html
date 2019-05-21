@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <meta name="keywords" content="Flat Dark Web Login Form Responsive Templates, Iphone Widget Template, Smartphone login forms,Login form, Widget Template, Responsive Templates, a Ipad 404 Templates, Flat Responsive Templates" />
+    <link href="/css/style.css" rel='stylesheet' type='text/css' />
+
+    <script src="/js/jquery-3.3.1.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+<script>
+    $(document).ready(function(c) {
+        $('.close').on('click', function(c){
+            $('.login-form').fadeOut('slow', function(c){
+                $('.login-form').remove();
+            });
+        });
+    });
+
+    function submit(){
+        console.log($("#password").val())
+        $.ajax({
+            type: 'POST',
+            dataType: "json",
+            async: false,
+            url: "/login/login",//请求的action路径页面
+            data: {"passWord":$("#password").val(),"userName":$("#username").val()},
+            error: function (XMLHttpRequest, textStatus, errorThrown) {//请求失败处理函数
+                console.log('请求失败');
+                console.log(XMLHttpRequest.status);
+                console.log(XMLHttpRequest.readyState);
+                console.log(textStatus);
+            },
+            success: function (data) { //请求成功后处理函数。
+               if(data.status==true){
+                   window.location.href="/login/render"
+               }
+            }
+        });
+    }
+
+
+</script>
+<!--SIGN UP-->
+<h1>Lerh</h1>
+<div class="login-form">
+    <div class="close"> </div>
+    <div class="head-info">
+        <label class="lbl-1"> </label>
+        <label class="lbl-2"> </label>
+        <label class="lbl-3"> </label>
+    </div>
+    <div class="clear"> </div>
+    <div class="avtar">
+        <img src="/images/avtar.png" />
+    </div>
+    <form>
+        <input type="text" id="username"  value=""  >
+        <div class="key">
+            <input type="text" id="password" value="" >
+        </div>
+    </form>
+    <div class="signin">
+        <input type="submit" value="Login" onclick="submit()">
+    </div>
+</div>
+<div class="copy-rights">
+    <p>lerh &copy; 2019.biubiubiu~~~.<a target="_blank" href="https://yys.163.com/">全图鉴点这里</a></p>
+</div>
+
+</body>
+</html>

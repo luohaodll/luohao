@@ -66,6 +66,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/login/lerh", "anon");
         filterChainDefinitionMap.put("/login/login", "anon");
         filterChainDefinitionMap.put("/fileController/**", "anon");
+        filterChainDefinitionMap.put("/userController/**", "anon");
 //       开放静态文件
         filterChainDefinitionMap.put("/js/**","anon");
         filterChainDefinitionMap.put("/css/**","anon");
